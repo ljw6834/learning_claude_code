@@ -13,12 +13,64 @@ MCP (Model Context Protocol) is a protocol that allows AI assistants like Claude
 
 ### 1. Generate a GitHub Personal Access Token
 
+#### Option A: Via GitHub Web UI
+
 1. Go to **GitHub > Settings > Developer settings > Personal access tokens > Tokens (classic)**
 2. Click **Generate new token (classic)**
 3. Select the required scopes:
    - `repo` — full control of private repositories
    - `read:org` — read org membership (if working with org repos)
 4. Copy the generated token
+
+#### Option B: Via GitHub CLI (`gh`)
+
+If you have the [GitHub CLI](https://cli.github.com/) installed, you can generate a PAT directly from the terminal:
+
+1. **Install gh** (if not already installed):
+
+   ```bash
+   # macOS
+   brew install gh
+
+   # Ubuntu/Debian
+   sudo apt install gh
+
+   # Windows
+   winget install GitHub.cli
+   ```
+
+2. **Authenticate with GitHub**:
+
+   ```bash
+   gh auth login
+   ```
+
+   Follow the interactive prompts to log in via browser or token.
+
+3. **Generate a PAT with the required scopes**:
+
+   ```bash
+   gh auth token
+   ```
+
+   This prints your current authentication token. To create a new token with specific scopes:
+
+   ```bash
+   gh auth refresh -s repo,read:org
+   gh auth token
+   ```
+
+   The first command requests additional scopes (`repo` and `read:org`), and the second prints the updated token.
+
+4. **Verify your authentication status**:
+
+   ```bash
+   gh auth status
+   ```
+
+   This shows which account you're logged into and what scopes are available.
+
+5. **Copy the token** from the output of `gh auth token` and use it in your MCP server configuration below.
 
 ### 2. Configure the GitHub MCP Server in Claude Code
 
