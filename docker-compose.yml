@@ -5,7 +5,8 @@ services:
       - "127.0.0.1:6901:6901"
       - "8080:8080"
     volumes:
-      - /users/lijun//ideaProjects
+      - /users/lijun/ideaProjects/learning_claude_code
     environment:
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - VNC_PW=1234test
 
